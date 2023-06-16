@@ -37,6 +37,7 @@ export function useActuators() {
   }
 
   async function refreshState(actuatorName) {
+    console.log("refreshing actuator by name, actuatorName=" + actuatorName);
     let url = "http://localhost:8080/actuators/current/" + actuatorName;
     const response = await fetch(url);
     if (response.status === 200) {
@@ -44,9 +45,12 @@ export function useActuators() {
       for (let i = 0; i < actuators.length; i++) {
         if (actuators[i].name === actuatorName) {
           actuators[i].currentState = data;
+          actuators[i].lastUpdated = new Date();
           return;
         }
       }
+    } else {
+      refreshActuatorError.value = "Unable to refresh actuator, expected HTTP 200.";
     }
   }
 

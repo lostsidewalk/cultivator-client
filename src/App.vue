@@ -40,20 +40,28 @@
     <!-- dashboard -->
     <div v-if="selectedTab === 'DASHBOARD'" class="p-4">
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        <SensorCard v-for="sensor in roSensors" :key="sensor" :sensorDefinition="sensor"
-          :sensorValue="sensor.currentValue" :lastUpdated="sensor.lastUpdated"
+        <SensorCard v-for="sensor in roSensors" :key="sensor" 
+          :sensorDefinition="sensor"
+          :sensorValue="sensor.currentValue" 
+          :lastUpdated="sensor.lastUpdated"
           @refreshValue="$event => refreshSensor(sensor.name)" />
-        <ActuatorCard v-for="actuator in roActuators" :key="actuator" :actuatorDefinition="actuator"
-          :actuatorState="actuator.currentState" :lastUpdated="actuator.lastUpdated"
-          @refreshState="$event => refreshState(actuator.name)" @activate="$event => activateActuator(actuator.name)"
+        <ActuatorCard v-for="actuator in roActuators" :key="actuator" 
+          :actuatorDefinition="actuator"
+          :actuatorState="actuator.currentState" 
+          :lastUpdated="actuator.lastUpdated"
+          @refreshState="$event => refreshState(actuator.name)" 
+          @activate="$event => activateActuator(actuator.name)"
           @deactivate="$event => deactivateActuator(actuator.name)" />
+        <RuleCard v-for="rule in roRules" :key="rule" :ruleName="rule" />
       </div>
     </div>
     <!-- sensors -->
     <div v-if="selectedTab === 'SENSORS'" class="p-4">
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        <SensorCard v-for="sensor in roSensors" :key="sensor" :sensorDefinition="sensor"
-          :sensorValue="sensor.currentValue" :lastUpdated="sensor.lastUpdated"
+        <SensorCard v-for="sensor in roSensors" :key="sensor" 
+          :sensorDefinition="sensor"
+          :sensorValue="sensor.currentValue" 
+          :lastUpdated="sensor.lastUpdated"
           @refreshValue="$event => refreshSensor(sensor.name)" />
       </div>
       <div v-if="roRefreshSensorError" class="text-red-500 mt-4">{{ roRefreshSensorError }}</div>
@@ -61,16 +69,20 @@
     <!-- actuators -->
     <div v-if="selectedTab === 'ACTUATORS'" class="p-4">
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        <ActuatorCard v-for="actuator in roActuators" :key="actuator" :actuatorDefinition="actuator"
-          :actuatorState="actuator.currentState" :lastUpdated="actuator.lastUpdated"
-          @refreshState="$event => refreshState(actuator.name)" @activate="$event => activateActuator(actuator.name)"
+        <ActuatorCard v-for="actuator in roActuators" :key="actuator" 
+          :actuatorDefinition="actuator"
+          :actuatorState="actuator.currentState" 
+          :lastUpdated="actuator.lastUpdated"
+          @refreshState="$event => refreshState(actuator.name)" 
+          @activate="$event => activateActuator(actuator.name)"
           @deactivate="$event => deactivateActuator(actuator.name)" />
       </div>
     </div>
     <!-- rules -->
     <div v-if="selectedTab === 'RULES'" class="p-4">
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        <RuleCard v-for="rule in roRules" :key="rule" :ruleDefinition="rule" />
+        <RuleCard v-for="rule in roRules" :key="rule" 
+          :ruleName="rule" />
       </div>
     </div>
   </main>

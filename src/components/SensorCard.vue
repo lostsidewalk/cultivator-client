@@ -2,7 +2,7 @@
   <div class="flex max-w-2xl mx-auto bg-white rounded-sm shadow-md">
     <div class="p-8">
       <div class="uppercase tracking-wide text-sm text-violet-500 font-medium">
-        {{ sensorDescription }}
+        SENSOR: {{ sensorDescription }}
       </div>
       <hr class="py-1" />
       <div class="mt-2" v-if="sensorValueDescription">
@@ -13,7 +13,7 @@
           <span class="font-medium">Last Updated:</span> {{ lastUpdated ? lastUpdated.toLocaleString() : 'N/A' }}
         </p>
       </div>
-      <div class="space-x-2">
+      <div class="space-x-2 flex">
         <button
           class="mt-2 px-3 py-1.5 text-sm tracking-wide font-medium text-white bg-violet-500 rounded hover:bg-violet-600 focus:outline-none focus:bg-violet-600"
           @click="$emit('refreshValue')">
