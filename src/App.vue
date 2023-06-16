@@ -57,7 +57,6 @@
           :actuatorState="actuator.currentState" :lastUpdated="actuator.lastUpdated"
           @refreshState="$event => refreshState(actuator.name)" @activate="$event => activateActuator(actuator.name)"
           @deactivate="$event => deactivateActuator(actuator.name)" />
-        <RuleCard v-for="rule in roRules" :key="rule" :ruleName="rule" />
       </div>
     </div>
     <!-- sensors -->
@@ -90,9 +89,28 @@
       <div v-if="roRuleServiceError">
         {{ roRuleServiceError }}
       </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        <RuleCard v-for="rule in roRules" :key="rule" :ruleName="rule" />
+      <!-- rules table -->
+      <div class="flex flex-col">
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+            <div class="overflow-hidden">
+              <table class="min-w-full text-center text-sm font-light">
+                <thead class="border-b font-medium dark:border-neutral-500">
+                  <tr>
+                    <th scope="col" class="px-6 py-2">Load Order</th>
+                    <th scope="col" class="px-6 py-2">Name</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b dark:border-neutral-500" v-for="(rule, idx) in roRules" :key="rule">
+                    <td class="whitespace-nowrap px-6 py-2 font-medium">{{ idx }}</td>
+                    <td class="whitespace-nowrap px-6 py-2">{{ rule }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </main>
@@ -107,7 +125,6 @@ import { useRules } from '@/composables/useRules.js';
 import Tab from './components/Tab.vue';
 import SensorCard from './components/SensorCard.vue';
 import ActuatorCard from './components/ActuatorCard.vue';
-import RuleCard from './components/RuleCard.vue';
 
 const selectedTab = ref('DASHBOARD');
 
@@ -129,10 +146,10 @@ const {
   deactivateActuator,
 } = useActuators();
 
-const { 
-  roRules, 
-  roRuleServiceError, 
-  loadRules 
+const {
+  roRules,
+  roRuleServiceError,
+  loadRules
 } = useRules();
 
 onBeforeMount(() => {
