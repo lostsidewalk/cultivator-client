@@ -21,8 +21,8 @@
         </button>
         <button
           :class="{
-            'mt-2 px-3 py-1.5 text-sm tracking-wide font-medium text-white bg-green-400 rounded hover:bg-green-500 focus:outline-none focus:bg-green-500': this.actuatorState === true,
-            'mt-2 px-3 py-1.5 text-sm tracking-wide font-medium text-white bg-red-400 rounded hover:bg-red-500 focus:outline-none focus:bg-red-500': this.actuatorState !== true
+            'mt-2 px-3 py-1.5 text-sm tracking-wide font-medium text-white bg-green-400 rounded hover:bg-green-500 focus:outline-none focus:bg-green-500': this.actuatorState !== true,
+            'mt-2 px-3 py-1.5 text-sm tracking-wide font-medium text-white bg-red-400 rounded hover:bg-red-500 focus:outline-none focus:bg-red-500': this.actuatorState === true
             }"
           @click="$emit(this.actuatorState === true ? 'deactivate' : 'activate')">
           {{ this.actuatorState ? 'DEACTIVATE' : 'ACTIVATE' }} 
